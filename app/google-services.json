@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "987686483094",
+    "firebase_url": "https://cows-7c4b7.firebaseio.com",
+    "project_id": "cows-7c4b7",
+    "storage_bucket": "cows-7c4b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987686483094:android:48b89065452b936fcd3eb7",
+        "android_client_info": {
+          "package_name": "com.example.trabajofinalmoviles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987686483094-3v29tim4nb16dq6art6vv44tkkm3qhjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAZ-HnciBPoyRQLrJ91JaWccf5JjCxd0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987686483094-3v29tim4nb16dq6art6vv44tkkm3qhjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
