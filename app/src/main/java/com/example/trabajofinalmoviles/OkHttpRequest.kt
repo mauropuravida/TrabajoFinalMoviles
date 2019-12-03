@@ -1,6 +1,7 @@
 package com.example.trabajofinalmoviles
 
 import okhttp3.*
+import org.json.JSONObject
 import java.util.*
 import java.util.Map
 
@@ -12,19 +13,10 @@ class OkHttpRequest(client: OkHttpClient) {
         this.client = client
     }
 
-    fun POST(url: String, parameters: HashMap<String, String>, callback: Callback): Call {
-        var json = "{"
-        val it = parameters.entries.iterator()
-        while (it.hasNext()) {
-            val pair = it.next() as Map.Entry<*, *>
-            json += "\""+pair.key.toString()+"\""+":"+"\""+pair.value.toString()+"\","
-        }
-
-        json += "}"
+    fun POST(url: String, js: JSONObject , callback: Callback): Call {
 
         val client = OkHttpClient()
-
-        val body: RequestBody = RequestBody.create(JSON, json)
+        val body: RequestBody = RequestBody.create(JSON, js.toString())
 
         val request = Request.Builder()
             .url(url)

@@ -10,10 +10,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_cow.*
-import kotlinx.android.synthetic.main.activity_add_herd.*
-import kotlinx.android.synthetic.main.activity_add_herd.addButton
-import kotlinx.android.synthetic.main.activity_add_herd.message
-import kotlinx.android.synthetic.main.activity_add_herd.valueId
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -22,11 +18,10 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.util.*
-import kotlin.collections.HashMap
 
 class addCowActivity : AppCompatActivity() {
 
-    val success = "Rodeo cargado"
+    val success = "Animal cargado"
     val fail = "No se pudo cargar el animal"
 
     private val CERO = "0"
@@ -52,21 +47,15 @@ class addCowActivity : AppCompatActivity() {
             var fecha2 = ultimoPartoView.text.toString()
             var fecha2Res = ""+fecha2[6]+fecha2[7]+fecha2[8]+fecha2[9]+"-"+fecha2[3]+fecha2[4]+"-"+fecha2[0]+fecha2[1]
 
-            /*for (index in fecha1.indices){
-                if
+            var js = JSONObject()
+            js.put("herdId", valueId.text.toString().toIntOrNull())
+            js.put("cantidadPartos",cantPartosView.text.toString().toIntOrNull())
+            js.put("electronicId",electronicIdView.text.toString())
+            js.put("fechaNacimiento",fecha1Res)
+            js.put("peso",pesoView.text.toString().toFloatOrNull())
+            js.put("ultimaFechaParto",fecha2Res)
 
-                textView.text = textView.text.toString() + name[index] + "\n"
-            }*/
-
-            var values = HashMap<String, String>()
-            values.put("herdId",valueId.text.toString())
-            values.put("cantidadPartos",cantPartosView.text.toString())
-            values.put("electronicId",electronicIdView.text.toString())
-            values.put("fechaNacimiento",fecha1Res)
-            values.put("peso",pesoView.text.toString())
-            values.put("ultimaFechaParto",fecha2Res)
-
-            request.POST("http://192.168.0.194:8080/api/cow", values,  object: Callback {
+            request.POST("http://192.168.0.194:8080/api/cow", js,  object: Callback {
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{
@@ -82,7 +71,7 @@ class addCowActivity : AppCompatActivity() {
                             ultimoPartoView.setText(json.getString("ultimaFechaParto"))*/
 
                             message.setText(success)
-                            layoutId.setVisibility(View.VISIBLE)
+                            layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -119,7 +108,7 @@ class addCowActivity : AppCompatActivity() {
             ultimoPartoView.setText(savedInstanceState.getString("ultimaFechaParto",""))
 
             if (savedInstanceState.getBoolean("layoutIdVisibility")) {
-                layoutId.setVisibility(View.VISIBLE)
+                layoutIdAddCow.setVisibility(View.VISIBLE)
                 message.setText(savedInstanceState.getString("message", ""))
                 if (savedInstanceState.getString("message", "") == success)
                     message.setBackgroundColor(Color.GREEN)
@@ -144,6 +133,14 @@ class addCowActivity : AppCompatActivity() {
 
     fun back(view: View){
         finish()
+    }
+
+    private fun toDateFormat(fecha : String): String{
+        return ""+fecha[6]+fecha[7]+fecha[8]+fecha[9]+"-"+fecha[3]+fecha[4]+"-"+fecha[0]+fecha[1]
+    }
+
+    private fun toDateFormatView(fecha : String): String{
+        return ""+fecha[8]+fecha[9]+"/"+fecha[5]+fecha[6]+"/"+fecha[0]+fecha[1]+fecha[2]+fecha[3]
     }
 
     private fun obtenerFecha(v: EditText) {
@@ -172,7 +169,7 @@ class addCowActivity : AppCompatActivity() {
             //outState.putString("ultimaFechaParto",ultimoPartoView.text.toString())
 
             outState.putString("message", message.text.toString())
-            outState.putBoolean("layoutIdVisibility", layoutId.isVisible)
+            outState.putBoolean("layoutIdVisibility", layoutIdAddCow.isVisible)
         }
     }
 }

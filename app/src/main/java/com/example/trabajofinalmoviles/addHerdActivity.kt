@@ -11,7 +11,6 @@ import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
-import kotlin.collections.HashMap
 
 
 class addHerdActivity : AppCompatActivity() {
@@ -24,9 +23,10 @@ class addHerdActivity : AppCompatActivity() {
 
             var request = OkHttpRequest(OkHttpClient())
 
-            var values = HashMap<String, String>()
-            values.put("location",loc.text.toString())
-            request.POST("http://192.168.0.194:8080/api/herd", values,  object: Callback{
+            var js = JSONObject()
+            js.put("location", loc.text.toString().toIntOrNull())
+
+            request.POST("http://192.168.0.194:8080/api/herd", js,  object: Callback{
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{
@@ -35,7 +35,7 @@ class addHerdActivity : AppCompatActivity() {
                             valueId.setText(json.getString("id"))
                             loc.setText(json.getString("location"))
                             message.setText(success)
-                            layoutId.setVisibility(View.VISIBLE)
+                            layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -67,7 +67,7 @@ class addHerdActivity : AppCompatActivity() {
             valueId.setText(savedInstanceState.getString("herdId",""))
 
             if (savedInstanceState.getBoolean("layoutIdVisibility")) {
-                layoutId.setVisibility(View.VISIBLE)
+                layoutIdAddCow.setVisibility(View.VISIBLE)
                 message.setText(savedInstanceState.getString("message", ""))
                 if (savedInstanceState.getString("message", "") == success)
                     message.setBackgroundColor(Color.GREEN)
@@ -92,7 +92,7 @@ class addHerdActivity : AppCompatActivity() {
             outState.putString("location", loc.text.toString())
             outState.putString("herdId", valueId.text.toString())
             outState.putString("message", message.text.toString())
-            outState.putBoolean("layoutIdVisibility", layoutId.isVisible)
+            outState.putBoolean("layoutIdVisibility", layoutIdAddCow.isVisible)
         }
     }
 
