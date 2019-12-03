@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#4E4848"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-26dp">
 
         <TextView
             android:id="@+id/message"
@@ -50,7 +52,7 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="numberSigned"
                     android:textSize="18sp"
                     android:textStyle="normal" />
 
@@ -63,6 +65,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutElectronicId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -86,7 +89,6 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:textSize="18sp" />
 
                 <TextView
@@ -98,6 +100,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutFechaNac"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -121,7 +124,6 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:textSize="18sp" />
 
                 <TextView
@@ -133,6 +135,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutUltimoParto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -156,7 +159,6 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:textSize="18sp" />
 
                 <TextView
@@ -168,6 +170,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutCantPatos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -191,7 +194,6 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:textSize="18sp" />
 
                 <TextView
@@ -203,6 +205,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutPeso"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -238,6 +241,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutHerdId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -273,6 +277,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutBCSId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -308,6 +313,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutFechaBCS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -343,6 +349,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutCC"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -389,7 +396,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/addButton"
+                    android:id="@+id/getButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".50"

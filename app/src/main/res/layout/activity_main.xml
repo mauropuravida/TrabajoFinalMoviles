@@ -48,8 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#4CAF50"
-            android:text="@string/consutar_rodeo"
-            android:onClick="dateTest"/>
+            android:text="@string/consutar_rodeo"/>
 
         <TextView
             android:id="@+id/textView17"
@@ -61,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#4CAF50"
-            android:text="@string/consultar_vaca" />
+            android:text="@string/consultar_vaca"
+            android:onClick="getCow"/>
 
         <TextView
             android:id="@+id/textView18"

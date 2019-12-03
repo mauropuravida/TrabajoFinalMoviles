@@ -88,7 +88,6 @@ class AddCowActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
-                            layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
@@ -121,14 +120,14 @@ class AddCowActivity : AppCompatActivity() {
             pesoView.setText(savedInstanceState.getString("peso",""))
             ultimoPartoView.setText(savedInstanceState.getString("ultimaFechaParto",""))
 
-            if (savedInstanceState.getBoolean("layoutIdVisibility")) {
+            if (savedInstanceState.getString("message", "") == success) {
                 layoutIdAddCow.setVisibility(View.VISIBLE)
-                message.setText(savedInstanceState.getString("message", ""))
-                if (savedInstanceState.getString("message", "") == success)
-                    message.setBackgroundColor(Color.GREEN)
-                else
+                message.setBackgroundColor(Color.GREEN)
+            }else
+                if (savedInstanceState.getString("message", "") == fail) {
                     message.setBackgroundColor(Color.RED)
-            }
+                }
+            message.setText(savedInstanceState.getString("message", ""))
         }
 
         ib_obtener_fechaNac.setOnClickListener(){

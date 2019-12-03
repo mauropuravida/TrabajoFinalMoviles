@@ -7,6 +7,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_herd.*
+import kotlinx.android.synthetic.main.activity_add_herd.addButton
+import kotlinx.android.synthetic.main.activity_add_herd.message
+import kotlinx.android.synthetic.main.activity_add_herd.valueId
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -67,14 +70,14 @@ class AddHerdActivity : AppCompatActivity() {
             loc.setText(savedInstanceState.getString("location",""))
             valueId.setText(savedInstanceState.getString("herdId",""))
 
-            if (savedInstanceState.getBoolean("layoutIdVisibility")) {
+            if (savedInstanceState.getString("message", "") == success) {
                 layoutIdAddHerd.setVisibility(View.VISIBLE)
-                message.setText(savedInstanceState.getString("message", ""))
-                if (savedInstanceState.getString("message", "") == success)
-                    message.setBackgroundColor(Color.GREEN)
-                else
+                message.setBackgroundColor(Color.GREEN)
+            }else
+                if (savedInstanceState.getString("message", "") == fail) {
                     message.setBackgroundColor(Color.RED)
-            }
+                }
+            message.setText(savedInstanceState.getString("message", ""))
         }
 
         addButton.setOnClickListener(){

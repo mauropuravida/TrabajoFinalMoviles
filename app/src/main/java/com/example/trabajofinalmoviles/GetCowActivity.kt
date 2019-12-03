@@ -1,17 +1,132 @@
 package com.example.trabajofinalmoviles
 
+import android.graphics.Color
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.activity_get_cow.*
+import kotlinx.android.synthetic.main.activity_get_cow.cantPartosView
+import kotlinx.android.synthetic.main.activity_get_cow.electronicIdView
+import kotlinx.android.synthetic.main.activity_get_cow.fechaNacView
+import kotlinx.android.synthetic.main.activity_get_cow.message
+import kotlinx.android.synthetic.main.activity_get_cow.pesoView
+import kotlinx.android.synthetic.main.activity_get_cow.ultimoPartoView
+import kotlinx.android.synthetic.main.activity_get_cow.valueId
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 
 class GetCowActivity : AppCompatActivity() {
+
+    val success = "Animal encontrado"
+    val fail = "No se encontro el animal"
+
+    inner class Tarea: AsyncTask<Void, Int, Void>() {
+        override fun doInBackground(vararg params: Void?): Void? {
+
+            var request = OkHttpRequest(OkHttpClient())
+
+            request.GET("http://192.168.0.194:8080/api/cow/"+valueId.text.toString(),  object: Callback {
+                override fun onResponse(call: Call?, response: Response) {
+                    val responseData = response.body()?.string()
+                    runOnUiThread{
+                        try {
+                            var json = JSONObject(responseData)
+                            valueId.setText(json.getString("id"))
+                            herdIdView.setText(json.getString("herdId"))
+                            cantPartosView.setText(json.getString("cantidadPartos"))
+                            electronicIdView.setText(json.getString("electronicId"))
+                            fechaNacView.setText(toDateFormatView(json.getString("fechaNacimiento")))
+                            pesoView.setText(json.getString("peso"))
+
+                            if (json.getString("ultimaFechaParto") == "null")
+                                ultimoPartoView.setText("dd/mm/yyyy")
+                            else
+                                ultimoPartoView.setText(toDateFormatView(json.getString("ultimaFechaParto")))
+
+                            layoutElectronicId.setVisibility(View.VISIBLE)
+                            layoutFechaNac.setVisibility(View.VISIBLE)
+                            layoutCantPatos.setVisibility(View.VISIBLE)
+                            layoutHerdId.setVisibility(View.VISIBLE)
+                            layoutPeso.setVisibility(View.VISIBLE)
+                            layoutUltimoParto.setVisibility(View.VISIBLE)
+
+                            //si posee condicion corporal
+                            if (json.getString("fechaBcs") != "null"){
+                                cowBcsIdView.setText(json.getString("cowBcsId"))
+                                fechaBcsView.setText(toDateFormatView(json.getString("fechaBcs")))
+                                CCView.setText(json.getString("cc"))
+
+                                layoutFechaBCS.setVisibility(View.VISIBLE)
+                                layoutBCSId.setVisibility(View.VISIBLE)
+                                layoutCC.setVisibility(View.VISIBLE)
+                            }
+
+                            message.setText(success)
+                            message.setBackgroundColor(Color.GREEN)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                            message.setText(fail)
+                            message.setBackgroundColor(Color.RED)
+                        }
+                    }
+                }
+                override fun onFailure(call: Call?, e: IOException?) {
+                    println(e)
+                }
+            })
+
+            return null
+        }
+        override fun onProgressUpdate(vararg values: Int?) {
+            super.onProgressUpdate(*values)
+        }
+    }
+
+    var asyn: Tarea? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_cow)
+
+        getButton.setOnClickListener(){
+            asyn = Tarea()
+            asyn?.execute()
+        }
     }
 
-    fun back(view: View){
+    fun back(view: View) {
         finish()
     }
+
+    private fun toDateFormatView(fecha : String): String{
+        return ""+fecha[8]+fecha[9]+"/"+fecha[5]+fecha[6]+"/"+fecha[0]+fecha[1]+fecha[2]+fecha[3]
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            outState.putString("cowId", valueId.text.toString())
+            outState.putString("herdId",herdIdView.text.toString())
+            outState.putString("cantidadPartos",cantPartosView.text.toString())
+            outState.putString("electronicId",electronicIdView.text.toString())
+            outState.putString("fechaNacimiento",fechaNacView.text.toString())
+            outState.putString("peso",pesoView.text.toString())
+            outState.putString("ultimaFechaParto",ultimoPartoView.text.toString())
+
+            outState.putString("cowBcsId",cowBcsIdView.text.toString())
+            outState.putString("fechaBCS",fechaBcsView.text.toString())
+            outState.putString("cc",CCView.text.toString())
+
+            outState.putString("message", message.text.toString())
+            outState.putBoolean("layoutElectronicIdVisibility", layoutElectronicId.isVisible)
+        }
+    }
 }
+
