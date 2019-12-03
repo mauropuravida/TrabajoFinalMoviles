@@ -14,13 +14,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_get_herd.*
-import kotlinx.android.synthetic.main.activity_get_herd.getButton
-import kotlinx.android.synthetic.main.activity_get_herd.message
-import kotlinx.android.synthetic.main.activity_get_herd.valueId
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -29,6 +27,8 @@ class GetHerdActivity : AppCompatActivity() {
 
     val success = "Rodeo encontrado"
     val fail = "No se encontro el rodeo"
+
+    var cowsInHerd: JSONArray? = null
 
     protected fun mostrarVaca(v: JSONObject){
         val id = v.getInt("id")
@@ -98,16 +98,17 @@ class GetHerdActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.GREEN)
 
                             val vacasArray = json.getJSONArray("cows")
+                            cowsInHerd = vacasArray
 
                             if (vacasArray.length() > 0) {
-                                scrollvacas.setVisibility(View.VISIBLE)
+                                vacas.setVisibility(View.VISIBLE)
                                 tituloVacas.text = "Vacas del rodeo:"
                                 for (i in 0 until vacasArray.length()) {
                                     mostrarVaca(vacasArray.getJSONObject(i))
                                 }
                             }else{
                                 tituloVacas.text = "No hay vacas en este rodeo"
-                                scrollvacas.setVisibility(View.GONE)
+                                vacas.setVisibility(View.GONE)
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -116,7 +117,7 @@ class GetHerdActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.RED)
                             layoutlocation.setVisibility(View.GONE)
                             layoutbcs.setVisibility(View.GONE)
-                            scrollvacas.setVisibility(View.GONE)
+                            vacas.setVisibility(View.GONE)
                         }
                         getButton.isEnabled = true
                     }
@@ -131,7 +132,7 @@ class GetHerdActivity : AppCompatActivity() {
                         layoutlocation.setVisibility(View.GONE)
                         layoutbcs.setVisibility(View.GONE)
                         getButton.isEnabled = true
-                        scrollvacas.setVisibility(View.GONE)
+                        vacas.setVisibility(View.GONE)
                     }
                 }
             })
@@ -154,13 +155,17 @@ class GetHerdActivity : AppCompatActivity() {
                 location.setText(savedInstanceState.getString("location", ""))
                 bcspromedio.setText(savedInstanceState.getString("bcsPromedio", ""))
 
-
                 layoutlocation.setVisibility(View.VISIBLE)
                 layoutbcs.setVisibility(View.VISIBLE)
 
                 if (savedInstanceState.getBoolean("scrollView")){
-                    scrollvacas.setVisibility(View.VISIBLE)
+                    vacas.setVisibility(View.VISIBLE)
 
+                    val cows = JSONArray(savedInstanceState.getString("json", ""))
+                    cowsInHerd = cows
+
+                    for (i in 0 until cows.length())
+                        mostrarVaca(cows.getJSONObject(i))
                 }
 
             }else
@@ -197,7 +202,8 @@ class GetHerdActivity : AppCompatActivity() {
             outState.putString("bcsPromedio", bcspromedio.text.toString())
             outState.putString("message", message.text.toString())
             outState.putString("tituloVacas", tituloVacas.text.toString())
-            outState.putBoolean("scrollView", scrollvacas.isVisible)
+            outState.putBoolean("scrollView", vacas.isVisible)
+            outState.putString("json", cowsInHerd.toString())
         }
     }
 }
