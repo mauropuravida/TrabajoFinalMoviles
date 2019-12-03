@@ -1,9 +1,11 @@
 package com.example.trabajofinalmoviles
 
+import android.content.Context
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_herd.*
@@ -81,6 +83,13 @@ class AddHerdActivity : AppCompatActivity() {
         }
 
         addButton.setOnClickListener(){
+            //ocultar teclado
+            val view = this.currentFocus
+            view?.let { v ->
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+
             asyn = Tarea()
             asyn?.execute()
         }

@@ -1,5 +1,6 @@
 package com.example.trabajofinalmoviles
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
@@ -7,11 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.marginTop
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_get_herd.*
+import kotlinx.android.synthetic.main.activity_get_herd.getButton
+import kotlinx.android.synthetic.main.activity_get_herd.message
+import kotlinx.android.synthetic.main.activity_get_herd.valueId
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -31,7 +36,7 @@ class GetHerdActivity : AppCompatActivity() {
         val cc = v.getDouble("cc")
 
         val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 2)
-        layoutParams.setMargins(5, 35, 0, 35)
+        layoutParams.setMargins(0, 35, 0, 35)
 
         val layoutParamsButton = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParamsButton.weight = 0f
@@ -140,8 +145,40 @@ class GetHerdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_herd)
+        if (savedInstanceState != null) {
+
+            if (savedInstanceState.getString("message", "") == success) {
+                message.setBackgroundColor(Color.GREEN)
+
+                valueId.setText(savedInstanceState.getString("herdId", ""))
+                location.setText(savedInstanceState.getString("location", ""))
+                bcspromedio.setText(savedInstanceState.getString("bcsPromedio", ""))
+
+
+                layoutlocation.setVisibility(View.VISIBLE)
+                layoutbcs.setVisibility(View.VISIBLE)
+
+                if (savedInstanceState.getBoolean("scrollView")){
+                    scrollvacas.setVisibility(View.VISIBLE)
+
+                }
+
+            }else
+                if (savedInstanceState.getString("message", "") == fail) {
+                    message.setBackgroundColor(Color.RED)
+                }
+            message.setText(savedInstanceState.getString("message", ""))
+            tituloVacas.setText(savedInstanceState.getString("tituloVacas", ""))
+        }
 
         getButton.setOnClickListener{
+            //ocultar teclado
+            val view = this.currentFocus
+            view?.let { v ->
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+
             getButton.isEnabled = false
             asyn = Tarea()
             asyn?.execute()
@@ -150,5 +187,17 @@ class GetHerdActivity : AppCompatActivity() {
 
     fun back(view: View) {
         finish()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            outState.putString("herdId", valueId.text.toString())
+            outState.putString("location", location.text.toString())
+            outState.putString("bcsPromedio", bcspromedio.text.toString())
+            outState.putString("message", message.text.toString())
+            outState.putString("tituloVacas", tituloVacas.text.toString())
+            outState.putBoolean("scrollView", scrollvacas.isVisible)
+        }
     }
 }
