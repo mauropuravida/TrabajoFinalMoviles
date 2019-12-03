@@ -184,8 +184,6 @@ class addCowActivity : AppCompatActivity() {
 
             outState.putString("message", message.text.toString())
             outState.putBoolean("layoutIdVisibility", layoutIdAddCow.isVisible)
-
-            println("VISIVILIDAD "+layoutIdAddCow.isVisible)
         }
     }
 }
