@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PickersActivity"></activity>
-        <activity android:name=".addCowActivity" />
-        <activity android:name=".addHerdActivity" />
+        <activity android:name=".GetCowActivity"></activity>
+        <activity android:name=".AddCowActivity" />
+        <activity android:name=".AddHerdActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

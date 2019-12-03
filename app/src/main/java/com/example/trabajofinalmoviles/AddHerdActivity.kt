@@ -13,7 +13,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 
-class addHerdActivity : AppCompatActivity() {
+class AddHerdActivity : AppCompatActivity() {
 
     val success = "Rodeo cargado"
     val fail = "No se pudo cargar el rodeo"

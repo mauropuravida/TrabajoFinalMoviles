@@ -20,7 +20,7 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.*
 
-class addCowActivity : AppCompatActivity() {
+class AddCowActivity : AppCompatActivity() {
 
     val success = "Animal cargado"
     val fail = "No se pudo cargar el animal"

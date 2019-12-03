@@ -4,15 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,17 +14,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addHerd(view: View){
-        val intent: Intent = Intent(this, addHerdActivity::class.java)
+        val intent: Intent = Intent(this, AddHerdActivity::class.java)
         startActivity(intent)
     }
 
     fun addCow(view: View){
-        val intent: Intent = Intent(this, addCowActivity::class.java)
+        val intent: Intent = Intent(this, AddCowActivity::class.java)
         startActivity(intent)
     }
 
-    fun dateTest(view: View){
-        val intent: Intent = Intent(this, PickersActivity::class.java)
+    fun getHerd(view: View){
+
+    }
+
+    fun getCow(view: View){
+        val intent: Intent = Intent(this, GetCowActivity::class.java)
         startActivity(intent)
     }
 }
