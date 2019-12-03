@@ -31,4 +31,9 @@ class MainActivity : AppCompatActivity() {
         val intent: Intent = Intent(this, addCowActivity::class.java)
         startActivity(intent)
     }
+
+    fun dateTest(view: View){
+        val intent: Intent = Intent(this, PickersActivity::class.java)
+        startActivity(intent)
+    }
 }
