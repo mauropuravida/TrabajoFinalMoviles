@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".40"
                     android:gravity="center_horizontal"
-                    android:text="Animal Id"
+                    android:text="Animal Id :"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="#FFFFFF" />
 
@@ -86,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Electronic Id"
+                            android:text="Electronic Id :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -121,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Fecha Nac"
+                            android:text="Fecha Nac :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -156,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Ultimo Parto"
+                            android:text="Ultimo Parto :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -191,7 +191,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Cant Partos"
+                            android:text="Cant Partos :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -226,7 +226,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Peso"
+                            android:text="Peso :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -262,7 +262,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Rodeo Id"
+                            android:text="Rodeo Id :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -298,7 +298,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="BCS Id"
+                            android:text="BCS Id :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -334,7 +334,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="Fecha BCS"
+                            android:text="Fecha BCS :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 
@@ -370,7 +370,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".40"
                             android:gravity="center_horizontal"
-                            android:text="C.C"
+                            android:text="C.C :"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             android:textColor="#FFFFFF" />
 

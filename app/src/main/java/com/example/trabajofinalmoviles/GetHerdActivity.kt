@@ -31,7 +31,7 @@ class GetHerdActivity : AppCompatActivity() {
         val cc = v.getDouble("cc")
 
         val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 2)
-        layoutParams.setMargins(0, 35, 0, 35)
+        layoutParams.setMargins(5, 35, 0, 35)
 
         val layoutParamsButton = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParamsButton.weight = 0f
@@ -95,12 +95,14 @@ class GetHerdActivity : AppCompatActivity() {
                             val vacasArray = json.getJSONArray("cows")
 
                             if (vacasArray.length() > 0) {
+                                scrollvacas.setVisibility(View.VISIBLE)
                                 tituloVacas.text = "Vacas del rodeo:"
                                 for (i in 0 until vacasArray.length()) {
                                     mostrarVaca(vacasArray.getJSONObject(i))
                                 }
                             }else{
                                 tituloVacas.text = "No hay vacas en este rodeo"
+                                scrollvacas.setVisibility(View.GONE)
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -109,6 +111,7 @@ class GetHerdActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.RED)
                             layoutlocation.setVisibility(View.GONE)
                             layoutbcs.setVisibility(View.GONE)
+                            scrollvacas.setVisibility(View.GONE)
                         }
                         getButton.isEnabled = true
                     }
@@ -123,6 +126,7 @@ class GetHerdActivity : AppCompatActivity() {
                         layoutlocation.setVisibility(View.GONE)
                         layoutbcs.setVisibility(View.GONE)
                         getButton.isEnabled = true
+                        scrollvacas.setVisibility(View.GONE)
                     }
                 }
             })

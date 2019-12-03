@@ -68,17 +68,40 @@ class GetCowActivity : AppCompatActivity() {
                                 layoutCC.setVisibility(View.VISIBLE)
                             }
 
-                            message.setText(success)
-                            message.setBackgroundColor(Color.GREEN)
+                            if (getIntent().getIntExtra("cowId", 0) == 0 ) {
+                                message.setText(success)
+                                message.setBackgroundColor(Color.GREEN)
+                            }
+
                         } catch (e: JSONException) {
                             e.printStackTrace()
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
+                            layoutElectronicId.setVisibility(View.GONE)
+                            layoutFechaNac.setVisibility(View.GONE)
+                            layoutCantPartos.setVisibility(View.GONE)
+                            layoutHerdId.setVisibility(View.GONE)
+                            layoutPeso.setVisibility(View.GONE)
+                            layoutUltimoParto.setVisibility(View.GONE)
+                            layoutFechaBCS.setVisibility(View.GONE)
+                            layoutBCSId.setVisibility(View.GONE)
+                            layoutCC.setVisibility(View.GONE)
                         }
                     }
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
+                    runOnUiThread{
+                        layoutElectronicId.setVisibility(View.GONE)
+                        layoutFechaNac.setVisibility(View.GONE)
+                        layoutCantPartos.setVisibility(View.GONE)
+                        layoutHerdId.setVisibility(View.GONE)
+                        layoutPeso.setVisibility(View.GONE)
+                        layoutUltimoParto.setVisibility(View.GONE)
+                        layoutFechaBCS.setVisibility(View.GONE)
+                        layoutBCSId.setVisibility(View.GONE)
+                        layoutCC.setVisibility(View.GONE)
+                    }
                 }
             })
 
