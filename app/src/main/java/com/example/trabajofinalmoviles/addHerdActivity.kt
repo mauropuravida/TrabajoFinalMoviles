@@ -24,7 +24,7 @@ class addHerdActivity : AppCompatActivity() {
             var request = OkHttpRequest(OkHttpClient())
 
             var js = JSONObject()
-            js.put("location", loc.text.toString().toIntOrNull())
+            js.put("location", loc.text.toString())
 
             request.POST("http://192.168.0.194:8080/api/herd", js,  object: Callback{
                 override fun onResponse(call: Call?, response: Response) {
@@ -35,10 +35,11 @@ class addHerdActivity : AppCompatActivity() {
                             valueId.setText(json.getString("id"))
                             loc.setText(json.getString("location"))
                             message.setText(success)
-                            layoutIdAddCow.setVisibility(View.VISIBLE)
+                            layoutIdAddHerd.setVisibility(View.VISIBLE)
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
+                            layoutIdAddHerd.setVisibility(View.VISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
@@ -67,7 +68,7 @@ class addHerdActivity : AppCompatActivity() {
             valueId.setText(savedInstanceState.getString("herdId",""))
 
             if (savedInstanceState.getBoolean("layoutIdVisibility")) {
-                layoutIdAddCow.setVisibility(View.VISIBLE)
+                layoutIdAddHerd.setVisibility(View.VISIBLE)
                 message.setText(savedInstanceState.getString("message", ""))
                 if (savedInstanceState.getString("message", "") == success)
                     message.setBackgroundColor(Color.GREEN)
@@ -92,7 +93,7 @@ class addHerdActivity : AppCompatActivity() {
             outState.putString("location", loc.text.toString())
             outState.putString("herdId", valueId.text.toString())
             outState.putString("message", message.text.toString())
-            outState.putBoolean("layoutIdVisibility", layoutIdAddCow.isVisible)
+            outState.putBoolean("layoutIdVisibility", layoutIdAddHerd.isVisible)
         }
     }
 

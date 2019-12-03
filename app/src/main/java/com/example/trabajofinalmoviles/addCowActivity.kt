@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompatSideChannelService
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_cow.*
 import okhttp3.Call
@@ -25,7 +26,6 @@ class addCowActivity : AppCompatActivity() {
     val fail = "No se pudo cargar el animal"
 
     private val CERO = "0"
-    private val DOS_PUNTOS = ":"
     private val BARRA = "/"
 
     //Calendario para obtener fecha & hora
@@ -41,19 +41,29 @@ class addCowActivity : AppCompatActivity() {
 
             var request = OkHttpRequest(OkHttpClient())
 
-            var fecha1 = fechaNacView.text.toString()
-            var fecha1Res = ""+fecha1[6]+fecha1[7]+fecha1[8]+fecha1[9]+"-"+fecha1[3]+fecha1[4]+"-"+fecha1[0]+fecha1[1]
+            //verificacion de input de fechas
+            var fecha1: String? = fechaNacView.text.toString()
+            var fecha2: String? = ultimoPartoView.text.toString()
 
-            var fecha2 = ultimoPartoView.text.toString()
-            var fecha2Res = ""+fecha2[6]+fecha2[7]+fecha2[8]+fecha2[9]+"-"+fecha2[3]+fecha2[4]+"-"+fecha2[0]+fecha2[1]
+            val pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}".toRegex()
+
+            if (pattern.matches(fecha1.toString()))
+                fecha1 = toDateFormat(fechaNacView.text.toString())
+            else
+                fecha1 = null
+
+            if (pattern.matches(fecha2.toString()))
+                fecha2 = toDateFormat(ultimoPartoView.text.toString())
+            else
+                fecha2 = null
 
             var js = JSONObject()
             js.put("herdId", valueId.text.toString().toIntOrNull())
             js.put("cantidadPartos",cantPartosView.text.toString().toIntOrNull())
             js.put("electronicId",electronicIdView.text.toString())
-            js.put("fechaNacimiento",fecha1Res)
+            js.put("fechaNacimiento", fecha1)
             js.put("peso",pesoView.text.toString().toFloatOrNull())
-            js.put("ultimaFechaParto",fecha2Res)
+            js.put("ultimaFechaParto", fecha2)
 
             request.POST("http://192.168.0.194:8080/api/cow", js,  object: Callback {
                 override fun onResponse(call: Call?, response: Response) {
@@ -61,20 +71,24 @@ class addCowActivity : AppCompatActivity() {
                     runOnUiThread{
                         try {
                             var json = JSONObject(responseData)
-                            println(json)
-                            /*valueCowId.setText(json.getString("id"))
+                            valueCowId.setText(json.getString("id"))
                             valueId.setText(json.getString("herdId"))
                             cantPartosView.setText(json.getString("cantidadPartos"))
                             electronicIdView.setText(json.getString("electronicId"))
-                            fechaNacView.setText(json.getString("fechaNacimiento"))
+                            fechaNacView.setText(toDateFormatView(json.getString("fechaNacimiento")))
                             pesoView.setText(json.getString("peso"))
-                            ultimoPartoView.setText(json.getString("ultimaFechaParto"))*/
+
+                            if (json.getString("ultimaFechaParto") == "null")
+                                ultimoPartoView.setText("dd/mm/yyyy")
+                            else
+                                ultimoPartoView.setText(toDateFormatView(json.getString("ultimaFechaParto")))
 
                             message.setText(success)
                             layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
+                            layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
@@ -164,12 +178,14 @@ class addCowActivity : AppCompatActivity() {
             outState.putString("herdId",valueId.text.toString())
             outState.putString("cantidadPartos",cantPartosView.text.toString())
             outState.putString("electronicId",electronicIdView.text.toString())
-            //outState.putString("fechaNacimiento",fechaNacView.text.toString())
+            outState.putString("fechaNacimiento",fechaNacView.text.toString())
             outState.putString("peso",pesoView.text.toString())
-            //outState.putString("ultimaFechaParto",ultimoPartoView.text.toString())
+            outState.putString("ultimaFechaParto",ultimoPartoView.text.toString())
 
             outState.putString("message", message.text.toString())
             outState.putBoolean("layoutIdVisibility", layoutIdAddCow.isVisible)
+
+            println("VISIVILIDAD "+layoutIdAddCow.isVisible)
         }
     }
 }
