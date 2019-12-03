@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getHerd(view: View){
-
+        val intent: Intent = Intent(this, GetHerdActivity::class.java)
+        startActivity(intent)
     }
 
     fun getCow(view: View){
