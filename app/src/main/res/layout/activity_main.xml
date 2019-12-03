@@ -97,7 +97,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#4CAF50"
-            android:text="@string/generar_bsc" />
+            android:text="@string/generar_bsc"
+            android:onClick="test"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
