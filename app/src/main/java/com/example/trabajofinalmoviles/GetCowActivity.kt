@@ -52,7 +52,7 @@ class GetCowActivity : AppCompatActivity() {
 
                             layoutElectronicId.setVisibility(View.VISIBLE)
                             layoutFechaNac.setVisibility(View.VISIBLE)
-                            layoutCantPatos.setVisibility(View.VISIBLE)
+                            layoutCantPartos.setVisibility(View.VISIBLE)
                             layoutHerdId.setVisibility(View.VISIBLE)
                             layoutPeso.setVisibility(View.VISIBLE)
                             layoutUltimoParto.setVisibility(View.VISIBLE)
@@ -94,8 +94,51 @@ class GetCowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_cow)
+        if (savedInstanceState != null) {
+
+            valueId.setText(savedInstanceState.getString("cowId",""))
+            herdIdView.setText(savedInstanceState.getString("herdId",""))
+            cantPartosView.setText(savedInstanceState.getString("cantidadPartos",""))
+            electronicIdView.setText(savedInstanceState.getString("electronicId",""))
+            fechaNacView.setText(savedInstanceState.getString("fechaNacimiento",""))
+            pesoView.setText(savedInstanceState.getString("peso",""))
+            ultimoPartoView.setText(savedInstanceState.getString("ultimaFechaParto",""))
+
+            cowBcsIdView.setText(savedInstanceState.getString("cowBcsId",""))
+            fechaBcsView.setText(savedInstanceState.getString("fechaBCS",""))
+            CCView.setText(savedInstanceState.getString("cc",""))
+
+            if (savedInstanceState.getString("message", "") == success) {
+
+                layoutElectronicId.setVisibility(View.VISIBLE)
+                layoutFechaNac.setVisibility(View.VISIBLE)
+                layoutCantPartos.setVisibility(View.VISIBLE)
+                layoutHerdId.setVisibility(View.VISIBLE)
+                layoutPeso.setVisibility(View.VISIBLE)
+                layoutUltimoParto.setVisibility(View.VISIBLE)
+
+                if (savedInstanceState.getString("fechaBCS","") == "dd/mm/yyyy") {
+                    layoutFechaBCS.setVisibility(View.VISIBLE)
+                    layoutBCSId.setVisibility(View.VISIBLE)
+                    layoutCC.setVisibility(View.VISIBLE)
+                }
+
+                message.setBackgroundColor(Color.GREEN)
+            }else
+                if (savedInstanceState.getString("message", "") == fail) {
+                    message.setBackgroundColor(Color.RED)
+                }
+            message.setText(savedInstanceState.getString("message", ""))
+        }
 
         getButton.setOnClickListener(){
+            asyn = Tarea()
+            asyn?.execute()
+        }
+
+
+        if (getIntent().getIntExtra("cowId", 0) > 0 ){
+            valueId.setText(getIntent().getIntExtra("cowId", 0).toString())
             asyn = Tarea()
             asyn?.execute()
         }
@@ -126,6 +169,14 @@ class GetCowActivity : AppCompatActivity() {
 
             outState.putString("message", message.text.toString())
             outState.putBoolean("layoutElectronicIdVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutFechaNacVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutCantPartosVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutHerdIdVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutPesoVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutUltimoPartoVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutFechaBCSVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutBCSIdVisibility", layoutElectronicId.isVisible)
+            outState.putBoolean("layoutCCVisibility", layoutElectronicId.isVisible)
         }
     }
 }

@@ -32,4 +32,10 @@ class MainActivity : AppCompatActivity() {
         val intent: Intent = Intent(this, GetCowActivity::class.java)
         startActivity(intent)
     }
+
+    fun test(view: View){
+        val intent: Intent = Intent(this, GetCowActivity::class.java)
+        intent.putExtra("cowId", 12)
+        startActivity(intent)
+    }
 }
