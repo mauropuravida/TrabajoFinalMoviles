@@ -102,11 +102,13 @@ class AddCowActivity : AppCompatActivity() {
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
-                    layoutIdAddCow.setVisibility(View.INVISIBLE)
-                    message.setText(fail)
-                    message.setBackgroundColor(Color.RED)
-                    addButton.isEnabled = true
-                    addButton.setText("Cargar")
+                    runOnUiThread {
+                        layoutIdAddCow.setVisibility(View.INVISIBLE)
+                        message.setText(fail)
+                        message.setBackgroundColor(Color.RED)
+                        addButton.isEnabled = true
+                        addButton.setText("Cargar")
+                    }
                 }
             })
 

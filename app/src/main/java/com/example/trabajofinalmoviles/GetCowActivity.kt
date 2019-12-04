@@ -98,6 +98,8 @@ class GetCowActivity : AppCompatActivity() {
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
                     runOnUiThread{
+                        message.setText(fail)
+                        message.setBackgroundColor(Color.RED)
                         layoutElectronicId.setVisibility(View.GONE)
                         layoutFechaNac.setVisibility(View.GONE)
                         layoutCantPartos.setVisibility(View.GONE)

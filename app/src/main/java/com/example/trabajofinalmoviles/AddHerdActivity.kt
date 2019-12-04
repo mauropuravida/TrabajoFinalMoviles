@@ -56,9 +56,13 @@ class AddHerdActivity : AppCompatActivity() {
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
-                    layoutIdAddHerd.setVisibility(View.INVISIBLE)
-                    addButton.setText("Cargar")
-                    addButton.isEnabled = true
+                    runOnUiThread {
+                        layoutIdAddHerd.setVisibility(View.INVISIBLE)
+                        message.setText(fail)
+                        message.setBackgroundColor(Color.RED)
+                        addButton.setText("Cargar")
+                        addButton.isEnabled = true
+                    }
                 }
             })
 

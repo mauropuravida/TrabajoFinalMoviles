@@ -33,6 +33,10 @@ class AlertasService: FirebaseMessagingService(){
         //super.onNewToken(p0)
     }
 
+    companion object {
+        var identificador = 0
+    }
+
     private fun mostrarNotificacion(title: String?, body: String?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -49,6 +53,6 @@ class AlertasService: FirebaseMessagingService(){
             .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(0, notificationBuilder.build())
+        notificationManager.notify(identificador++, notificationBuilder.build())
     }
 }
