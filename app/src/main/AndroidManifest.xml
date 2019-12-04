@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddHerdAlertActivity"></activity>
-        <activity android:name=".GeneracionBcsActivity"></activity>
+        <activity android:name=".AddCowAlertActivity"></activity>
+        <activity android:name=".AddHerdAlertActivity" />
+        <activity android:name=".GeneracionBcsActivity" />
         <activity android:name=".ConfiguracionUrlActivity" />
         <activity android:name=".GetHerdActivity" />
         <activity android:name=".GetCowActivity" />

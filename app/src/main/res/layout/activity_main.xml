@@ -80,11 +80,12 @@
                     android:layout_height="wrap_content" />
 
                 <Button
-                    android:id="@+id/addCowAllert"
+                    android:id="@+id/addCowAlert"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#4CAF50"
-                    android:text="@string/cargar_alerta_de_vaca" />
+                    android:text="@string/cargar_alerta_de_vaca"
+                    android:onClick="addCowAlert"/>
 
                 <TextView
                     android:id="@+id/textView19"

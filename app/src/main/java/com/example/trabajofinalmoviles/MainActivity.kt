@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun addCowAlert(view: View){
+        val intent: Intent = Intent(this, AddCowAlertActivity::class.java)
+        startActivity(intent)
+    }
+
     fun addHerdAlert(view: View){
         val intent: Intent = Intent(this, AddHerdAlertActivity::class.java)
         startActivity(intent)

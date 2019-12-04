@@ -7,9 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import kotlinx.android.synthetic.main.activity_add_herd_alert.*
-import kotlinx.android.synthetic.main.activity_add_herd_alert.message
-import kotlinx.android.synthetic.main.activity_add_herd_alert.valueId
+import kotlinx.android.synthetic.main.activity_add_cow_alert.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -18,41 +16,45 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-class AddHerdAlertActivity : AppCompatActivity() {
+class AddCowAlertActivity : AppCompatActivity() {
+
 
     val success = "Alerta cargada"
     val fail = "No se pudo cargar la alerta"
 
-    inner class Tarea: AsyncTask<Void, Void, Void>() {
+    inner class Tarea : AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
 
             var request = OkHttpRequest(OkHttpClient())
 
             var js = JSONObject()
-            js.put("herdId", valueHerdId.text.toString().toLongOrNull())
-            js.put("bcsThresholdMax",maxBcs.text.toString().toBigDecimalOrNull())
-            js.put("bcsThresholdMin",minBcs.text.toString().toBigDecimalOrNull())
+            js.put("cowId", valueCowId.text.toString().toLongOrNull())
+            js.put("bcsThresholdMax", maxBcs.text.toString().toBigDecimalOrNull())
+            js.put("bcsThresholdMin", minBcs.text.toString().toBigDecimalOrNull())
 
-            val conexion = "http://"+getSharedPreferences(ConfiguracionUrlActivity.PREFS_FILENAME, Context.MODE_PRIVATE).getString("address", "")+"/api/herdAlert"
+            val conexion = "http://" + getSharedPreferences(
+                ConfiguracionUrlActivity.PREFS_FILENAME,
+                Context.MODE_PRIVATE
+            ).getString("address", "") + "/api/cowAlert"
 
-            request.POST(conexion, js,  object: Callback {
+            request.POST(conexion, js, object : Callback {
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
-                    runOnUiThread{
+                    runOnUiThread {
                         try {
                             var json = JSONObject(responseData)
                             valueId.setText(json.getString("id"))
-                            valueHerdId.setText(json.getString("herdId"))
+                            valueCowId.setText(json.getString("animalId"))
                             maxBcs.setText(json.getString("bcsThresholdMax"))
                             minBcs.setText(json.getString("bcsThresholdMin"))
 
 
                             message.setText(success)
-                            layoutIdAddHerd.setVisibility(View.VISIBLE)
+                            layoutIdAddCow.setVisibility(View.VISIBLE)
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
-                            layoutIdAddHerd.setVisibility(View.INVISIBLE)
+                            layoutIdAddCow.setVisibility(View.INVISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
@@ -60,10 +62,11 @@ class AddHerdAlertActivity : AppCompatActivity() {
                         addButton.setText("Cargar")
                     }
                 }
+
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
                     runOnUiThread {
-                        layoutIdAddHerd.setVisibility(View.INVISIBLE)
+                        layoutIdAddCow.setVisibility(View.INVISIBLE)
                         message.setText(fail)
                         message.setBackgroundColor(Color.RED)
                         addButton.isEnabled = true
@@ -80,21 +83,21 @@ class AddHerdAlertActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_herd_alert)
+        setContentView(R.layout.activity_add_cow_alert)
         if (savedInstanceState != null) {
 
             if (savedInstanceState.getString("message", "") == success) {
-                layoutIdAddHerd.setVisibility(View.VISIBLE)
+                layoutIdAddCow.setVisibility(View.VISIBLE)
                 message.setBackgroundColor(Color.GREEN)
                 valueId.setText(savedInstanceState.getString("alertId", ""))
-            }else
+            } else
                 if (savedInstanceState.getString("message", "") == fail) {
                     message.setBackgroundColor(Color.RED)
                 }
             message.setText(savedInstanceState.getString("message", ""))
         }
 
-        addButton.setOnClickListener(){
+        addButton.setOnClickListener() {
             //ocultar teclado
             val view = this.currentFocus
             view?.let { v ->
