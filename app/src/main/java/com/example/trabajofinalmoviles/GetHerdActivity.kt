@@ -160,12 +160,11 @@ class GetHerdActivity : AppCompatActivity() {
                 layoutlocation.setVisibility(View.VISIBLE)
                 layoutbcs.setVisibility(View.VISIBLE)
 
-                if (savedInstanceState.getBoolean("scrollView")){
+                val cows = JSONArray(savedInstanceState.getString("json", ""))
+                cowsInHerd = cows
+
+                if ( cows.length() > 0) {
                     vacas.setVisibility(View.VISIBLE)
-
-                    val cows = JSONArray(savedInstanceState.getString("json", ""))
-                    cowsInHerd = cows
-
                     for (i in 0 until cows.length())
                         mostrarVaca(cows.getJSONObject(i))
                 }
