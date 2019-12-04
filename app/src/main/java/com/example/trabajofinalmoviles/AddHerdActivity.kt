@@ -31,7 +31,9 @@ class AddHerdActivity : AppCompatActivity() {
             var js = JSONObject()
             js.put("location", loc.text.toString())
 
-            request.POST("http://192.168.0.194:8080/api/herd", js,  object: Callback{
+            val conexion = "http://"+getSharedPreferences(ConfiguracionUrlActivity.PREFS_FILENAME, Context.MODE_PRIVATE).getString("address", "")+"/api/herd"
+
+            request.POST(conexion, js,  object: Callback{
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{

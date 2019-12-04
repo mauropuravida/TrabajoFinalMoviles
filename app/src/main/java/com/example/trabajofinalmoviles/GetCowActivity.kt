@@ -34,7 +34,9 @@ class GetCowActivity : AppCompatActivity() {
 
             var request = OkHttpRequest(OkHttpClient())
 
-            request.GET("http://192.168.0.194:8080/api/cow/"+valueId.text.toString(),  object: Callback {
+            val conexion = "http://"+getSharedPreferences(ConfiguracionUrlActivity.PREFS_FILENAME, Context.MODE_PRIVATE).getString("address", "")+"/api/cow/"
+
+            request.GET(conexion+valueId.text.toString(),  object: Callback {
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{

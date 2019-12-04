@@ -67,7 +67,9 @@ class AddCowActivity : AppCompatActivity() {
             js.put("peso",pesoView.text.toString().toFloatOrNull())
             js.put("ultimaFechaParto", fecha2)
 
-            request.POST("http://192.168.0.194:8080/api/cow", js,  object: Callback {
+            val conexion = "http://"+getSharedPreferences(ConfiguracionUrlActivity.PREFS_FILENAME, Context.MODE_PRIVATE).getString("address", "")+"/api/cow"
+
+            request.POST(conexion, js,  object: Callback {
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{

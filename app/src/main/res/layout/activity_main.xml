@@ -12,120 +12,140 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView14"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/addHerd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cargar_rodeo"
-            android:background="#4CAF50"
-            android:onClick="addHerd"/>
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/addCow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cargar_vaca"
-            android:background="#4CAF50"
-            android:onClick="addCow"/>
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/getRodeo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:onClick="getHerd" android:text="@string/consutar_rodeo"/>
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/getCow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:text="@string/consultar_vaca"
-            android:onClick="getCow"/>
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/addCowAllert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:text="@string/cargar_alerta_de_vaca" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/addHerdAlert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:text="@string/cargar_alerta_de_rodeo" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/generateBCS"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:text="@string/generar_bsc"/>
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/setterUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4CAF50"
-            android:text="Configurar URL"
-            android:onClick="setUrl"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/quit"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#C62828"
-                android:onClick="exit"
-                android:text="SALIR" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/addHerd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:onClick="addHerd"
+                    android:text="@string/cargar_rodeo" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/addCow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:onClick="addCow"
+                    android:text="@string/cargar_vaca" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/getRodeo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:onClick="getHerd"
+                    android:text="@string/consutar_rodeo" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/getCow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:onClick="getCow"
+                    android:text="@string/consultar_vaca" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/addCowAllert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:text="@string/cargar_alerta_de_vaca" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/addHerdAlert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:text="@string/cargar_alerta_de_rodeo" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/generateBCS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:text="@string/generar_bsc" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/setterUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4CAF50"
+                    android:onClick="setUrl"
+                    android:text="Configurar URL" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_vertical"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="126dp" />
+
+                    <Button
+                        android:id="@+id/quit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#C62828"
+                        android:onClick="exit"
+                        android:text="SALIR" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

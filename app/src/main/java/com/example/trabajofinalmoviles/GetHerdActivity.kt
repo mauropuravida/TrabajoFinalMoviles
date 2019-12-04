@@ -79,7 +79,9 @@ class GetHerdActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: Void?): Void? {
             var request = OkHttpRequest(OkHttpClient())
 
-            request.GET("http://192.168.0.194:8080/api/herd/"+valueId.text.toString(),  object: Callback {
+            val conexion = "http://"+getSharedPreferences(ConfiguracionUrlActivity.PREFS_FILENAME, Context.MODE_PRIVATE).getString("address", "")+"/api/herd/"
+
+            request.GET(conexion+valueId.text.toString(),  object: Callback {
                 override fun onResponse(call: Call?, response: Response) {
                     val responseData = response.body()?.string()
                     runOnUiThread{

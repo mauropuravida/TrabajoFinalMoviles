@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setUrl(view: View){
-
+        val intent: Intent = Intent(this, ConfiguracionUrlActivity::class.java)
+        startActivity(intent)
     }
 
     fun exit(view: View){
