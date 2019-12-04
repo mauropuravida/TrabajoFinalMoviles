@@ -54,9 +54,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun test(view: View){
-        val intent: Intent = Intent(this, GetCowActivity::class.java)
-        intent.putExtra("cowId", 12)
-        startActivity(intent)
+    fun setUrl(view: View){
+
+    }
+
+    fun exit(view: View){
+        finishAndRemoveTask()
     }
 }

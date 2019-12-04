@@ -97,8 +97,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#4CAF50"
-            android:text="@string/generar_bsc"
-            android:onClick="test"/>
+            android:text="@string/generar_bsc"/>
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/setterUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4CAF50"
+            android:text="Configurar URL"
+            android:onClick="setUrl"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/quit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C62828"
+                android:onClick="exit"
+                android:text="SALIR" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

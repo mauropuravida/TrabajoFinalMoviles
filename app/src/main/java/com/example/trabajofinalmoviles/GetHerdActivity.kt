@@ -77,7 +77,6 @@ class GetHerdActivity : AppCompatActivity() {
 
     inner class Tarea: AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
-
             var request = OkHttpRequest(OkHttpClient())
 
             request.GET("http://192.168.0.194:8080/api/herd/"+valueId.text.toString(),  object: Callback {
@@ -119,6 +118,7 @@ class GetHerdActivity : AppCompatActivity() {
                             layoutbcs.setVisibility(View.GONE)
                             vacas.setVisibility(View.GONE)
                         }
+                        getButton.setText("Consultar")
                         getButton.isEnabled = true
                     }
                 }
@@ -131,12 +131,12 @@ class GetHerdActivity : AppCompatActivity() {
                         message.setBackgroundColor(Color.RED)
                         layoutlocation.setVisibility(View.GONE)
                         layoutbcs.setVisibility(View.GONE)
-                        getButton.isEnabled = true
                         vacas.setVisibility(View.GONE)
+                        getButton.isEnabled = true
+                        getButton.setText("Consultar")
                     }
                 }
             })
-
             return null
         }
     }
@@ -183,8 +183,11 @@ class GetHerdActivity : AppCompatActivity() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
-
+            message.setText("Realizando consulta")
+            message.setBackgroundColor(Color.GREEN)
             getButton.isEnabled = false
+            getButton.setText("Consultando...")
+
             asyn = Tarea()
             asyn?.execute()
         }

@@ -90,13 +90,21 @@ class AddCowActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
+                            layoutIdAddCow.setVisibility(View.INVISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
+                        addButton.isEnabled = true
+                        addButton.setText("Cargar")
                     }
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
+                    layoutIdAddCow.setVisibility(View.INVISIBLE)
+                    message.setText(fail)
+                    message.setBackgroundColor(Color.RED)
+                    addButton.isEnabled = true
+                    addButton.setText("Cargar")
                 }
             })
 
@@ -147,6 +155,10 @@ class AddCowActivity : AppCompatActivity() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
+            message.setText("Enviando datos")
+            message.setBackgroundColor(Color.GREEN)
+            addButton.isEnabled = false
+            addButton.setText("Cargando...")
 
             asyn = Tarea()
             asyn?.execute()

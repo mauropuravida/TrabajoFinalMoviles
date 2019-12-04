@@ -44,14 +44,19 @@ class AddHerdActivity : AppCompatActivity() {
                             message.setBackgroundColor(Color.GREEN)
                         } catch (e: JSONException) {
                             e.printStackTrace()
-                            layoutIdAddHerd.setVisibility(View.VISIBLE)
+                            layoutIdAddHerd.setVisibility(View.INVISIBLE)
                             message.setText(fail)
                             message.setBackgroundColor(Color.RED)
                         }
+                        addButton.setText("Cargar")
+                        addButton.isEnabled = true
                     }
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
                     println(e)
+                    layoutIdAddHerd.setVisibility(View.INVISIBLE)
+                    addButton.setText("Cargar")
+                    addButton.isEnabled = true
                 }
             })
 
@@ -89,6 +94,10 @@ class AddHerdActivity : AppCompatActivity() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
+            message.setText("Enviando datos")
+            message.setBackgroundColor(Color.GREEN)
+            addButton.setText("Cargando...")
+            addButton.isEnabled = false
 
             asyn = Tarea()
             asyn?.execute()

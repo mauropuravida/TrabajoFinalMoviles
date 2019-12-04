@@ -89,6 +89,8 @@ class GetCowActivity : AppCompatActivity() {
                             layoutBCSId.setVisibility(View.GONE)
                             layoutCC.setVisibility(View.GONE)
                         }
+                        getButton.setText("Consultar")
+                        getButton.isEnabled = true
                     }
                 }
                 override fun onFailure(call: Call?, e: IOException?) {
@@ -103,6 +105,8 @@ class GetCowActivity : AppCompatActivity() {
                         layoutFechaBCS.setVisibility(View.GONE)
                         layoutBCSId.setVisibility(View.GONE)
                         layoutCC.setVisibility(View.GONE)
+                        getButton.setText("Consultar")
+                        getButton.isEnabled = true
                     }
                 }
             })
@@ -163,7 +167,10 @@ class GetCowActivity : AppCompatActivity() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                 imm?.hideSoftInputFromWindow(v.windowToken, 0)
             }
-
+            message.setText("Realizando consulta")
+            message.setBackgroundColor(Color.GREEN)
+            getButton.setText("Consultando...")
+            getButton.isEnabled = false
             asyn = Tarea()
             asyn?.execute()
         }
