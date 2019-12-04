@@ -23,6 +23,8 @@ import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.text.ParsePosition
+import java.text.SimpleDateFormat
 
 class GetCowActivity : AppCompatActivity() {
 
@@ -117,9 +119,6 @@ class GetCowActivity : AppCompatActivity() {
 
             return null
         }
-        override fun onProgressUpdate(vararg values: Int?) {
-            super.onProgressUpdate(*values)
-        }
     }
 
     var asyn: Tarea? = null
@@ -191,8 +190,20 @@ class GetCowActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun toDateFormatView(fecha : String): String{
-        return ""+fecha[8]+fecha[9]+"/"+fecha[5]+fecha[6]+"/"+fecha[0]+fecha[1]+fecha[2]+fecha[3]
+    private fun toDateFormatView(fecha : String): String?{
+        return formatoFecha(fecha, "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "dd/MM/yyyy")
+    }
+
+    private fun formatoFecha(fecha: String?, patronEntrada: String, patronSalida: String): String?{
+        if (fecha == null) return null
+
+        val pos = ParsePosition(0)
+        var simpledateformat = SimpleDateFormat(patronEntrada)
+        val date = simpledateformat.parse(fecha, pos) //Hacer un Date con la fecha recibido
+        if (date == null) return null //Si no parseó bien, retornar null
+
+        simpledateformat = SimpleDateFormat(patronSalida)
+        return simpledateformat.format(date) //Retornar Date formateado con el formato de salida
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

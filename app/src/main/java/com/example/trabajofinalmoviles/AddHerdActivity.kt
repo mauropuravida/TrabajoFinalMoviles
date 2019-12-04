@@ -68,9 +68,6 @@ class AddHerdActivity : AppCompatActivity() {
 
             return null
         }
-        override fun onProgressUpdate(vararg values: Int?) {
-            super.onProgressUpdate(*values)
-        }
     }
 
     var asyn: Tarea? = null

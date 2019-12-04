@@ -20,6 +20,8 @@ import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.text.ParsePosition
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddCowActivity : AppCompatActivity() {
@@ -44,20 +46,9 @@ class AddCowActivity : AppCompatActivity() {
             var request = OkHttpRequest(OkHttpClient())
 
             //verificacion de input de fechas
-            var fecha1: String? = fechaNacView.text.toString()
-            var fecha2: String? = ultimoPartoView.text.toString()
+            val fecha1: String? = toDateFormat(fechaNacView.text.toString())
+            val fecha2: String? = toDateFormat(ultimoPartoView.text.toString())
 
-            val pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}".toRegex()
-
-            if (pattern.matches(fecha1.toString()))
-                fecha1 = toDateFormat(fechaNacView.text.toString())
-            else
-                fecha1 = null
-
-            if (pattern.matches(fecha2.toString()))
-                fecha2 = toDateFormat(ultimoPartoView.text.toString())
-            else
-                fecha2 = null
 
             var js = JSONObject()
             js.put("herdId", valueId.text.toString().toIntOrNull())
@@ -113,9 +104,6 @@ class AddCowActivity : AppCompatActivity() {
             })
 
             return null
-        }
-        override fun onProgressUpdate(vararg values: Int?) {
-            super.onProgressUpdate(*values)
         }
     }
 
@@ -173,12 +161,24 @@ class AddCowActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun toDateFormat(fecha : String): String{
-        return ""+fecha[6]+fecha[7]+fecha[8]+fecha[9]+"-"+fecha[3]+fecha[4]+"-"+fecha[0]+fecha[1]
+    private fun toDateFormat(fecha : String?): String?{
+        return formatoFecha(fecha, "dd/MM/yyyy", "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     }
 
-    private fun toDateFormatView(fecha : String): String{
-        return ""+fecha[8]+fecha[9]+"/"+fecha[5]+fecha[6]+"/"+fecha[0]+fecha[1]+fecha[2]+fecha[3]
+    private fun toDateFormatView(fecha : String): String?{
+        return formatoFecha(fecha, "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "dd/MM/yyyy")
+    }
+
+    private fun formatoFecha(fecha: String?, patronEntrada: String, patronSalida: String): String?{
+        if (fecha == null) return null
+
+        val pos = ParsePosition(0)
+        var simpledateformat = SimpleDateFormat(patronEntrada)
+        val date = simpledateformat.parse(fecha, pos) //Hacer un Date con la fecha recibido
+        if (date == null) return null //Si no parseó bien, retornar null
+
+        simpledateformat = SimpleDateFormat(patronSalida)
+        return simpledateformat.format(date) //Retornar Date formateado con el formato de salida
     }
 
     private fun obtenerFecha(v: EditText) {
