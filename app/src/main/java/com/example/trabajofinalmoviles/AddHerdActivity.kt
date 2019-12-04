@@ -23,7 +23,7 @@ class AddHerdActivity : AppCompatActivity() {
     val success = "Rodeo cargado"
     val fail = "No se pudo cargar el rodeo"
 
-    inner class Tarea: AsyncTask<Void, Int, Void>() {
+    inner class Tarea: AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
 
             var request = OkHttpRequest(OkHttpClient())

@@ -40,7 +40,7 @@ class AddCowActivity : AppCompatActivity() {
     val dia = c[Calendar.DAY_OF_MONTH]
     val anio = c[Calendar.YEAR]
 
-    inner class Tarea: AsyncTask<Void, Int, Void>() {
+    inner class Tarea: AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
 
             var request = OkHttpRequest(OkHttpClient())

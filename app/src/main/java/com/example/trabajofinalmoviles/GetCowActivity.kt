@@ -31,8 +31,8 @@ class GetCowActivity : AppCompatActivity() {
     val success = "Animal encontrado"
     val fail = "No se encontro el animal"
 
-    inner class Tarea: AsyncTask<Void, Int, Void>() {
-        override fun doInBackground(vararg params: Void?): Void? {
+    inner class Tarea: AsyncTask<Boolean, Void, Void>() {
+        override fun doInBackground(vararg params: Boolean?): Void? {
 
             var request = OkHttpRequest(OkHttpClient())
 
@@ -72,9 +72,13 @@ class GetCowActivity : AppCompatActivity() {
                                 layoutFechaBCS.setVisibility(View.VISIBLE)
                                 layoutBCSId.setVisibility(View.VISIBLE)
                                 layoutCC.setVisibility(View.VISIBLE)
+                            }else{
+                                layoutFechaBCS.setVisibility(View.GONE)
+                                layoutBCSId.setVisibility(View.GONE)
+                                layoutCC.setVisibility(View.GONE)
                             }
 
-                            if (getIntent().getIntExtra("cowId", 0) == 0 ) {
+                            if (params[0]!!) {
                                 message.setText(success)
                                 message.setBackgroundColor(Color.GREEN)
                             }
@@ -175,14 +179,14 @@ class GetCowActivity : AppCompatActivity() {
             getButton.setText("Consultando...")
             getButton.isEnabled = false
             asyn = Tarea()
-            asyn?.execute()
+            asyn?.execute(true)
         }
 
 
         if (getIntent().getIntExtra("cowId", 0) > 0 ){
             valueId.setText(getIntent().getIntExtra("cowId", 0).toString())
             asyn = Tarea()
-            asyn?.execute()
+            asyn?.execute(false)
         }
     }
 
