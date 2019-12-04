@@ -41,7 +41,9 @@ class GeneracionBcsActivity : AppCompatActivity() {
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
-                            message.setText("INACTIVO")
+                            if (params[0] != null)
+                                switchActivacion.isChecked = !params[0]!!
+                            message.setText("ERROR AL CONECTARSE")
                             message.setBackgroundColor(Color.RED)
                         }
                         switchActivacion.isEnabled = true
@@ -51,7 +53,9 @@ class GeneracionBcsActivity : AppCompatActivity() {
                     println(e)
                     runOnUiThread{
                         switchActivacion.isEnabled = true
-                        message.setText("INACTIVO")
+                        if (params[0] != null)
+                            switchActivacion.isChecked = !params[0]!!
+                        message.setText("ERROR AL CONECTARSE")
                         message.setBackgroundColor(Color.RED)
                     }
                 }
@@ -82,7 +86,7 @@ class GeneracionBcsActivity : AppCompatActivity() {
         asyn = Tarea()
         asyn?.execute(null)
 
-        switchActivacion.setOnCheckedChangeListener { _, _ ->
+        switchActivacion.setOnClickListener { _ ->
             asyn = Tarea()
             asyn?.execute(switchActivacion.isChecked)
         }
