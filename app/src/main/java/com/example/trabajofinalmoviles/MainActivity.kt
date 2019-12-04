@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun generacionBcs(view: View){
+        val intent: Intent = Intent(this, GeneracionBcsActivity::class.java)
+        startActivity(intent)
+    }
+
     fun setUrl(view: View){
         val intent: Intent = Intent(this, ConfiguracionUrlActivity::class.java)
         startActivity(intent)

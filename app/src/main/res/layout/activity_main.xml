@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#4CAF50"
-                    android:text="@string/generar_bsc" />
+                    android:onClick="generacionBcs" android:text="@string/generar_bsc"/>
 
                 <TextView
                     android:id="@+id/textView21"
