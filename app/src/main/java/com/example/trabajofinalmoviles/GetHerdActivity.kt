@@ -206,7 +206,6 @@ class GetHerdActivity : AppCompatActivity() {
             outState.putString("bcsPromedio", bcspromedio.text.toString())
             outState.putString("message", message.text.toString())
             outState.putString("tituloVacas", tituloVacas.text.toString())
-            outState.putBoolean("scrollView", vacas.isVisible)
             outState.putString("json", cowsInHerd.toString())
         }
     }

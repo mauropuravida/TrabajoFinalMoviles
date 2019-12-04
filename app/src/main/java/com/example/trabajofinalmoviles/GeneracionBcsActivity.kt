@@ -1,6 +1,7 @@
 package com.example.trabajofinalmoviles
 
 import android.content.Context
+import android.graphics.Color
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,8 +31,18 @@ class GeneracionBcsActivity : AppCompatActivity() {
                         try {
                             val estado = (responseData == "true")
                             switchActivacion.isChecked = estado
+                            if (estado) {
+                                message.setText("ACTIVO")
+                                message.setBackgroundColor(Color.GREEN)
+                            }
+                            else{
+                                message.setText("INACTIVO")
+                                message.setBackgroundColor(Color.RED)
+                            }
                         } catch (e: JSONException) {
                             e.printStackTrace()
+                            message.setText("INACTIVO")
+                            message.setBackgroundColor(Color.RED)
                         }
                         switchActivacion.isEnabled = true
                     }
@@ -40,6 +51,8 @@ class GeneracionBcsActivity : AppCompatActivity() {
                     println(e)
                     runOnUiThread{
                         switchActivacion.isEnabled = true
+                        message.setText("INACTIVO")
+                        message.setBackgroundColor(Color.RED)
                     }
                 }
             }
