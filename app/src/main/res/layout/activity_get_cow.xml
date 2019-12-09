@@ -52,7 +52,7 @@
                     android:autofillHints=""
                     android:background="#FEFEFE"
                     android:ems="10"
-                    android:inputType="numberSigned"
+                    android:inputType="number"
                     android:textSize="18sp"
                     android:textStyle="normal" />
 

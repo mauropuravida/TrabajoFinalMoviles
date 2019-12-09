@@ -93,7 +93,7 @@
                             android:autofillHints=""
                             android:background="#FEFEFE"
                             android:ems="10"
-                            android:inputType="numberSigned" />
+                            android:inputType="number"/>
 
                         <TextView
                             android:id="@+id/textView17"
@@ -125,7 +125,7 @@
                             android:layout_weight=".50"
                             android:background="#FEFEFE"
                             android:ems="10"
-                            android:inputType="numberSigned" />
+                            android:inputType="number"/>
 
                         <TextView
                             android:id="@+id/textView1"
@@ -194,7 +194,7 @@
                             android:layout_weight=".50"
                             android:background="#FEFEFE"
                             android:ems="10"
-                            android:inputType="numberSigned|numberDecimal" />
+                            android:inputType="numberDecimal"/>
 
                         <TextView
                             android:id="@+id/textView9"
@@ -226,7 +226,7 @@
                             android:layout_weight=".50"
                             android:background="#FEFEFE"
                             android:ems="10"
-                            android:inputType="numberSigned" />
+                            android:inputType="number"/>
 
                         <TextView
                             android:id="@+id/textView11"

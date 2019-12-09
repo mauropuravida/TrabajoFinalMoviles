@@ -2,8 +2,6 @@ package com.example.trabajofinalmoviles
 
 import okhttp3.*
 import org.json.JSONObject
-import java.util.*
-import java.util.Map
 
 
 class OkHttpRequest(client: OkHttpClient) {
