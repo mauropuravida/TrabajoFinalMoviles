@@ -159,16 +159,10 @@
                             android:hint="@string/formato_fecha"
                             android:inputType="date" />
 
-                        <Button
-                            android:id="@+id/ib_obtener_fechaNac"
+                        <TextView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".10"
-                            android:backgroundTint="#009CEB"
-                            android:minHeight="35dp"
-                            android:textSize="10sp"
-                            app:layout_constraintTop_toBottomOf="@+id/textView"
-                            tools:ignore="ContentDescription" />
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10" />
 
                     </LinearLayout>
 
@@ -261,16 +255,10 @@
                             android:hint="@string/formato_fecha"
                             android:inputType="date" />
 
-                        <Button
-                            android:id="@+id/ib_obtener_fechaParto"
+                        <TextView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".10"
-                            android:backgroundTint="#009CEB"
-                            android:minHeight="35dp"
-                            android:textSize="10sp"
-                            app:layout_constraintTop_toBottomOf="@+id/textView"
-                            tools:ignore="ContentDescription" />
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".10" />
                     </LinearLayout>
 
                     <TextView

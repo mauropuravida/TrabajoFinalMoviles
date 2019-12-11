@@ -6,11 +6,11 @@ import android.content.Context
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompatSideChannelService
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_cow.*
 import okhttp3.Call
@@ -132,12 +132,22 @@ class AddCowActivity : AppCompatActivity() {
             message.setText(savedInstanceState.getString("message", ""))
         }
 
-        ib_obtener_fechaNac.setOnClickListener(){
-            obtenerFecha(fechaNacView)
+        fechaNacView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                obtenerFecha(fechaNacView)
+                true
+            }else {
+                false
+            }
         }
 
-        ib_obtener_fechaParto.setOnClickListener(){
-            obtenerFecha(ultimoPartoView)
+        ultimoPartoView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                obtenerFecha(ultimoPartoView)
+                true
+            }else {
+                false
+            }
         }
 
         addButton.setOnClickListener(){
