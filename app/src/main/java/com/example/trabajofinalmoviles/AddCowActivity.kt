@@ -47,12 +47,17 @@ class AddCowActivity : AppCompatActivity() {
 
             //verificacion de input de fechas
             val fecha1: String? = toDateFormat(fechaNacView.text.toString())
-            val fecha2: String? = toDateFormat(ultimoPartoView.text.toString())
+            var fecha2: String? = toDateFormat(ultimoPartoView.text.toString())
+
+
+            val cantidadDePartos = cantPartosView.text.toString().toIntOrNull()
+            if (cantidadDePartos == null || cantidadDePartos == 0)
+                fecha2 = null
 
 
             var js = JSONObject()
             js.put("herdId", valueId.text.toString().toIntOrNull())
-            js.put("cantidadPartos",cantPartosView.text.toString().toIntOrNull())
+            js.put("cantidadPartos",cantidadDePartos)
             js.put("electronicId",electronicIdView.text.toString())
             js.put("fechaNacimiento", fecha1)
             js.put("peso",pesoView.text.toString().toFloatOrNull())
